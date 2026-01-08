@@ -1,0 +1,4 @@
+packages:
+- name: uutils/coreutils@0.5.0
+  tags:
+  - coreutils

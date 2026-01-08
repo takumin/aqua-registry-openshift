@@ -1,0 +1,11 @@
+# Task state files
+.task/
+
+# Node.js modules
+node_modules/
+
+# direnv files
+.envrc
+
+# Log files
+*.log

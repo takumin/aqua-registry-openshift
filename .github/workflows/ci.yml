@@ -1,0 +1,45 @@
+name: CI
+on:
+  push:
+    branches:
+    - main
+    tags:
+    - 'v*'
+  pull_request:
+permissions: {}
+jobs:
+  ##############################################################################
+  # Format
+  ##############################################################################
+  format:
+    name: Format
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    permissions:
+      contents: read
+    uses: ./.github/workflows/wc-format.yml
+  ##############################################################################
+  # Reviewdog
+  ##############################################################################
+  reviewdog:
+    name: Reviewdog
+    if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+    permissions:
+      actions: read
+      checks: write
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/wc-reviewdog.yml
+  ##############################################################################
+  # Status Check
+  ##############################################################################
+  ci:
+    needs:
+    - format
+    - reviewdog
+    name: CI
+    runs-on: ubuntu-slim
+    timeout-minutes: 3
+    if: ${{ failure() || cancelled() }}
+    steps:
+    - name: Failure Status
+      run: exit 1

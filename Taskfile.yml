@@ -1,0 +1,19 @@
+# https://taskfile.dev
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+includes:
+  tool: ./tasks/tool.task.yml
+  format: ./tasks/format.task.yml
+  reviewdog: ./tasks/reviewdog.task.yml
+
+tasks:
+  default:
+    desc: '{{.TASK}}'
+    silent: true
+    aliases: [all]
+    cmds:
+    - task: tool
+    - task: format
+    - task: reviewdog

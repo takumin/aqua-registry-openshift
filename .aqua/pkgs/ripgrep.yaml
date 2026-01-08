@@ -1,0 +1,4 @@
+packages:
+- name: BurntSushi/ripgrep@15.1.0
+  tags:
+  - reviewdog

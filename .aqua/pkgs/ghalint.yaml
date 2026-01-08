@@ -1,0 +1,4 @@
+packages:
+- name: suzuki-shunsuke/ghalint@v1.5.4
+  tags:
+  - ghalint

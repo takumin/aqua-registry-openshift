@@ -1,0 +1,31 @@
+name: Format
+on:
+  workflow_call:
+permissions: {}
+concurrency:
+  group: format-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+jobs:
+  format:
+    name: Format
+    runs-on: ubuntu-slim
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      with:
+        persist-credentials: false
+    - name: Setup aqua
+      uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
+      with:
+        aqua_version: v2.55.3
+    - name: Format files
+      run: |-
+        task format
+    - name: Detected changes
+      run: |-
+        git reset
+        git -c core.fileMode=false add --all
+        git diff --name-only --staged --no-renames --exit-code
