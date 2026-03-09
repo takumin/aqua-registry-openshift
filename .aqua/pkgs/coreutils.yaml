@@ -1,4 +1,4 @@
 packages:
-- name: uutils/coreutils@0.6.0
+- name: uutils/coreutils@0.7.0
   tags:
   - coreutils
