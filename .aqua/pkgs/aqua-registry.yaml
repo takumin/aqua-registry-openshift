@@ -1,4 +1,4 @@
 packages:
-- name: aquaproj/registry-tool@v0.3.6
+- name: aquaproj/registry-tool@v0.4.1
   tags:
   - aqua-registry
